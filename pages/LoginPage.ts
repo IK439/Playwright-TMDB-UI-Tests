@@ -3,15 +3,28 @@ import { BasePage } from "./BasePage";
 import { ENV } from "../utils/env";
 
 export class LoginPage extends BasePage {
-  readonly emailInput: Locator;
+  readonly heading: Locator;
+  readonly usernameInput: Locator;
   readonly passwordInput: Locator;
-  readonly submitButton: Locator;
+  readonly loginButton: Locator;
+  readonly resetPasswordLink: Locator;
+  readonly errorMessage: Locator;
+  readonly profile: Locator;
+  readonly avatar: Locator;
 
   constructor(page: Page) {
     super(page);
-    this.emailInput = page.getByRole("textbox", { name: "Username" });
+
+    this.heading = page.getByRole("heading", { name: "Login to your account" });
+    this.usernameInput = page.getByRole("textbox", { name: "Username" });
     this.passwordInput = page.getByRole("textbox", { name: "Password" });
-    this.submitButton = page.getByRole("button", { name: "Login" });
+    this.loginButton = page.getByRole("button", { name: "Login" });
+    this.resetPasswordLink = page.getByRole("link", { name: "Reset password" });
+
+    this.errorMessage = page.getByText("There was a problem");
+
+    this.profile = page.getByRole("link", { name: "Profile and Settings" });
+    this.avatar = page.getByRole("link", { name: "i", exact: true });
   }
 
   async navigateToLogin() {
@@ -22,8 +35,8 @@ export class LoginPage extends BasePage {
     username: string = ENV.username,
     password: string = ENV.password,
   ) {
-    await this.emailInput.fill(username);
+    await this.usernameInput.fill(username);
     await this.passwordInput.fill(password);
-    await this.submitButton.click();
+    await this.loginButton.click();
   }
 }

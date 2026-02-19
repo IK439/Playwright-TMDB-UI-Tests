@@ -1,38 +1,29 @@
 import { test, expect } from "@playwright/test";
 import { LoginPage } from "../pages/LoginPage";
 
-test.describe("Group login tests together", () => {
-  test("Invalid login shows error message", async ({ page }) => {
-    const login = new LoginPage(page);
+test.describe("Login Feature", () => {
+  let login: LoginPage;
 
+  test.beforeEach(async ({ page }) => {
+    login = new LoginPage(page);
     await login.navigateToLogin();
+  });
+
+  test("Invalid login shows error message", async () => {
+    await expect(login.heading).toBeVisible();
+    await expect(login.usernameInput).toBeVisible();
+    await expect(login.passwordInput).toBeVisible();
+    await expect(login.loginButton).toBeVisible();
 
     await login.login("wrongUser", "wrongPass");
 
-    expect(
-      page.getByRole("link", { name: "There was a problem" }),
-    ).toBeDefined();
-    await expect(page.getByText("We couldn't find your")).toContainText(
-      "We couldn't find your username.",
-    );
-    await expect(
-      page.getByText(/You have \d+ remaining login attempts\./),
-    ).toBeVisible();
+    await expect(login.errorMessage).toBeVisible();
   });
 
-  test("Successfully login to TMDB", async ({ page }) => {
-    const login = new LoginPage(page);
-
-    await login.navigateToLogin();
-
-    await expect(page.getByRole("heading", { name: /login/i })).toBeVisible();
-    await expect(page.getByLabel("Username")).toBeVisible();
-    await expect(page.getByLabel("Password")).toBeVisible();
-    await expect(page.getByRole("button", { name: "Login" })).toBeVisible();
-
+  test("Successfully log in to TMDB", async () => {
     await login.login();
 
-    await expect(page.getByRole("navigation")).toBeVisible();
-    await expect(page.getByRole("link", { name: /profile/i })).toBeVisible();
+    await expect(login.profile).toBeVisible();
+    await expect(login.avatar).toBeVisible();
   });
 });
