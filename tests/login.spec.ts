@@ -1,29 +1,23 @@
-import { test, expect } from "@playwright/test";
-import { LoginPage } from "../pages/LoginPage";
+import { test, expect } from "../fixtures/base";
 
 test.describe("Login Feature", () => {
-  let login: LoginPage;
+  test("Invalid login shows error message", async ({ loginPage }) => {
+    await expect(loginPage.heading).toContainText("Login to your account");
 
-  test.beforeEach(async ({ page }) => {
-    login = new LoginPage(page);
-    await login.navigateToLogin();
+    await loginPage.login("wrongUser", "wrongPass");
+
+    await expect(loginPage.errorMessage).toContainText("There was a problem");
   });
 
-  test("Invalid login shows error message", async () => {
-    await expect(login.heading).toBeVisible();
-    await expect(login.usernameInput).toBeVisible();
-    await expect(login.passwordInput).toBeVisible();
-    await expect(login.loginButton).toBeVisible();
+  test("Successfully log in to TMDB", async ({ loginPage }) => {
+    await expect(loginPage.heading).toContainText("Login to your account");
+    await expect(loginPage.usernameInput).toBeEnabled();
+    await expect(loginPage.passwordInput).toBeEnabled();
+    await expect(loginPage.loginButton).toBeEnabled();
 
-    await login.login("wrongUser", "wrongPass");
+    await loginPage.login();
 
-    await expect(login.errorMessage).toBeVisible();
-  });
-
-  test("Successfully log in to TMDB", async () => {
-    await login.login();
-
-    await expect(login.profile).toBeVisible();
-    await expect(login.avatar).toBeVisible();
+    await expect(loginPage.profile).toBeAttached();
+    await expect(loginPage.avatar).toBeAttached();
   });
 });

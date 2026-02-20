@@ -21,7 +21,7 @@ export class LoginPage extends BasePage {
     this.loginButton = page.getByRole("button", { name: "Login" });
     this.resetPasswordLink = page.getByRole("link", { name: "Reset password" });
 
-    this.errorMessage = page.getByText("There was a problem");
+    this.errorMessage = page.getByRole("link", { name: "There was a problem" });
 
     this.profile = page.getByRole("link", { name: "Profile and Settings" });
     this.avatar = page.getByRole("link", { name: "i", exact: true });

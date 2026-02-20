@@ -5,11 +5,15 @@ import { ENV } from "../utils/env";
 export class HomePage extends BasePage {
   readonly searchInput: Locator;
   readonly searchResults: Locator;
+  readonly searchItem: Locator;
 
   constructor(page: Page) {
     super(page);
-    this.searchInput = page.locator("#search_v4");
-    this.searchResults = page.locator("#search_v4_listbox li");
+    this.searchInput = page.getByPlaceholder(
+      "Search for a movie, tv show, person......",
+    );
+    this.searchResults = page.getByRole("heading", { name: "Search Results" });
+    this.searchItem = page.getByText("Inception July 16, 2010 Cobb");
   }
 
   async navigateToHome() {
@@ -18,7 +22,7 @@ export class HomePage extends BasePage {
 
   async searchMovie(movieName: string) {
     await this.searchInput.fill(movieName);
-    await this.searchResults.first().waitFor({ state: "visible" });
+    await this.searchInput.press("Enter");
   }
 
   async selectMovieFromResults(movieName: string) {
