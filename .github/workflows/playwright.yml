@@ -26,6 +26,7 @@ jobs:
         TMDB_BASE_URL: ${{ secrets.TMDB_BASE_URL }}
         TMDB_USERNAME: ${{ secrets.TMDB_USERNAME }}
         TMDB_PASSWORD: ${{ secrets.TMDB_PASSWORD }}
+        TMDB_EMAIL: ${{ secrets.TMDB_EMAIL }}
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
