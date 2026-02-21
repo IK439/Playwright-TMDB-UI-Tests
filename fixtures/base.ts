@@ -5,7 +5,9 @@ import * as Page from "./index";
 type MyFixtures = {
   homePage: Page.HomePage;
   loginPage: Page.LoginPage;
+  popularAwardsPage: Page.PopularAwardsPage;
   resetPasswordPage: Page.ResetPasswordPage;
+  upcomingAwardsPage: Page.UpcomingAwardsPage;
 };
 
 // Extend Playwright's base test with custom fixtures
@@ -26,12 +28,28 @@ export const test = base.extend<MyFixtures>({
     await use(loginPage);
   },
 
+  popularAwardsPage: async ({ page }, use) => {
+    const popularAwardsPage = new Page.PopularAwardsPage(page);
+
+    await popularAwardsPage.navigateToPopularAwards();
+
+    await use(popularAwardsPage);
+  },
+
   resetPasswordPage: async ({ page }, use) => {
     const resetPassword = new Page.ResetPasswordPage(page);
 
     await resetPassword.navigateToResetPassword();
 
     await use(resetPassword);
+  },
+
+  upcomingAwardsPage: async ({ page }, use) => {
+    const upcomingAwardsPage = new Page.UpcomingAwardsPage(page);
+
+    await upcomingAwardsPage.navigateToUpcomingAwards();
+
+    await use(upcomingAwardsPage);
   },
 });
 

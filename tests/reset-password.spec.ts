@@ -1,13 +1,6 @@
 import { test, expect } from "../fixtures/base";
 
 test.describe("Reset Password Feature", () => {
-  test("Enter email and click continue", async ({ resetPasswordPage }) => {
-    await resetPasswordPage.enterEmailAndContinue();
-    await expect(resetPasswordPage.passWordReset).toContainText(
-      "Password Reset",
-    );
-  });
-
   test("Clicking continue with no email shows error message", async ({
     resetPasswordPage,
   }) => {
@@ -23,6 +16,13 @@ test.describe("Reset Password Feature", () => {
     await resetPasswordPage.clickCancel();
     await expect(resetPasswordPage.loginHeading).toContainText(
       "Login to your account",
+    );
+  });
+
+  test("Enter email and click continue", async ({ resetPasswordPage }) => {
+    await resetPasswordPage.enterEmailAndContinue();
+    await expect(resetPasswordPage.passWordReset).toContainText(
+      "Password Reset",
     );
   });
 });
