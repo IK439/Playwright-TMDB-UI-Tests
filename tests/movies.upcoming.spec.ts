@@ -13,6 +13,8 @@ test.describe("Upcoming Movies Feature", () => {
     await expect(moviesUpcomingPage.showMeEverything).toBeChecked();
     await expect(moviesUpcomingPage.allAvailabilities).toBeChecked();
     await expect(moviesUpcomingPage.allReleases).not.toBeChecked();
+    await expect(moviesUpcomingPage.allCountries).toBeChecked();
+    await expect(moviesUpcomingPage.theatrical).toBeChecked();
 
     await moviesUpcomingPage.filterFromDate(1, 2, 2026);
     await expect(moviesUpcomingPage.filterFrom).toHaveValue(

@@ -70,6 +70,7 @@ export class MoviesPageTwo extends BasePage {
     });
     this.theatrical = page.getByRole("checkbox", {
       name: "Theatrical",
+      exact: true,
     });
 
     this.filterFrom = page.locator("#release_date_gte");
