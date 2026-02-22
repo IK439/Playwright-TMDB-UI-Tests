@@ -30,7 +30,7 @@ export default defineConfig({
     baseURL: process.env.TMDB_BASE_URL,
     screenshot: "only-on-failure",
     launchOptions: {
-      slowMo: process.env.CI ? 50 : 50,
+      slowMo: process.env.CI ? 100 : 100,
     },
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
