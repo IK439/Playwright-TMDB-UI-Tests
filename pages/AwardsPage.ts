@@ -1,8 +1,11 @@
 import { Page, Locator } from "@playwright/test";
 import { BasePage } from "./BasePage";
 import { ENV } from "../utils/env";
+import * as Type from "../types/movies.types";
 
-export class UpcomingAwardsPage extends BasePage {
+export class AwardsPage extends BasePage {
+  private config: Type.AwardsPageType;
+
   readonly sort: Locator;
   readonly sortDropDown: Locator;
   readonly sortOption: Locator;
@@ -14,23 +17,21 @@ export class UpcomingAwardsPage extends BasePage {
   readonly searchButton: Locator;
   readonly searchResults: Locator;
 
-  constructor(page: Page) {
+  constructor(page: Page, config: Type.AwardsPageType) {
     super(page);
+    this.config = config;
 
     this.sort = page.getByRole("heading", { name: "Sort" });
 
-    this.sortDropDown = page
-      .getByRole("combobox")
-      .filter({ hasText: "Popularity" })
-      .getByLabel("select");
+    this.sortDropDown = page.getByText(this.config.defaultSortText).first();
 
     this.sortOption = page.getByRole("option", {
-      name: "Popularity Descending",
+      name: this.config.sortOption,
     });
 
     this.sortOptionText = page
       .locator("span")
-      .filter({ hasText: "Popularity Descending" })
+      .filter({ hasText: this.config.sortOption })
       .nth(1);
 
     this.filterFrom = page.locator("#release_date_gte");
@@ -42,22 +43,22 @@ export class UpcomingAwardsPage extends BasePage {
     this.searchResults = page.locator(".white_column");
   }
 
-  async navigateToUpcomingAwards() {
-    await this.navigate(`${ENV.baseUrl}/award/upcoming`);
+  async navigateToAwardsPage() {
+    await this.navigate(`${ENV.baseUrl}${this.config.path}`);
   }
 
-  async sortResultsBy() {
+  async sortResults() {
     await this.sort.click();
     await this.sortDropDown.click();
     await this.sortOption.click();
   }
 
-  async filterFromDate(month: number, day: number, year: number) {
-    await this.filterFrom.fill(`${month}/${day}/${year}`);
+  async filterFromDate(day: number, month: number, year: number) {
+    await this.filterFrom.fill(`${day}/${month}/${year}`);
   }
 
-  async filterToDate(month: number, day: number, year: number) {
-    await this.filterTo.fill(`${month}/${day}/${year}`);
+  async filterToDate(day: number, month: number, year: number) {
+    await this.filterTo.fill(`${day}/${month}/${year}`);
   }
 
   async search() {

@@ -1,13 +1,18 @@
 import { test as base } from "@playwright/test";
 import * as Page from "./index";
+import * as Config from "../config/config";
 
 // Define the custom fixtures available to tests
 type MyFixtures = {
   homePage: Page.HomePage;
   loginPage: Page.LoginPage;
-  popularAwardsPage: Page.PopularAwardsPage;
+  moviesPopularPage: Page.MoviesPageOne;
+  moviesTopRatedPage: Page.MoviesPageOne;
+  moviesNowPlayingPage: Page.MoviesPageTwo;
+  moviesUpcomingPage: Page.MoviesPageTwo;
+  popularAwardsPage: Page.AwardsPage;
   resetPasswordPage: Page.ResetPasswordPage;
-  upcomingAwardsPage: Page.UpcomingAwardsPage;
+  upcomingAwardsPage: Page.AwardsPage;
 };
 
 // Extend Playwright's base test with custom fixtures
@@ -28,14 +33,6 @@ export const test = base.extend<MyFixtures>({
     await use(loginPage);
   },
 
-  popularAwardsPage: async ({ page }, use) => {
-    const popularAwardsPage = new Page.PopularAwardsPage(page);
-
-    await popularAwardsPage.navigateToPopularAwards();
-
-    await use(popularAwardsPage);
-  },
-
   resetPasswordPage: async ({ page }, use) => {
     const resetPassword = new Page.ResetPasswordPage(page);
 
@@ -44,10 +41,68 @@ export const test = base.extend<MyFixtures>({
     await use(resetPassword);
   },
 
-  upcomingAwardsPage: async ({ page }, use) => {
-    const upcomingAwardsPage = new Page.UpcomingAwardsPage(page);
+  moviesPopularPage: async ({ page }, use) => {
+    const moviesPopularPage = new Page.MoviesPageOne(
+      page,
+      Config.popularMoviesConfig,
+    );
 
-    await upcomingAwardsPage.navigateToUpcomingAwards();
+    await moviesPopularPage.navigateToMoviesPage();
+
+    await use(moviesPopularPage);
+  },
+
+  moviesTopRatedPage: async ({ page }, use) => {
+    const moviesTopRatedPage = new Page.MoviesPageOne(
+      page,
+      Config.topRatedMoviesConfig,
+    );
+
+    await moviesTopRatedPage.navigateToMoviesPage();
+
+    await use(moviesTopRatedPage);
+  },
+
+  moviesNowPlayingPage: async ({ page }, use) => {
+    const moviesNowPlayingPage = new Page.MoviesPageTwo(
+      page,
+      Config.nowPlayingMoviesConfig,
+    );
+
+    await moviesNowPlayingPage.navigateToMoviesPage();
+
+    await use(moviesNowPlayingPage);
+  },
+
+  moviesUpcomingPage: async ({ page }, use) => {
+    const moviesUpcomingPage = new Page.MoviesPageTwo(
+      page,
+      Config.upcomingMoviesConfig,
+    );
+
+    await moviesUpcomingPage.navigateToMoviesPage();
+
+    await use(moviesUpcomingPage);
+  },
+
+  popularAwardsPage: async ({ page }, use) => {
+    const popularAwardsPage = new Page.AwardsPage(
+      page,
+      Config.popularAwardsConfig,
+    );
+
+    await popularAwardsPage.navigateToAwardsPage();
+
+    await use(popularAwardsPage);
+  },
+
+  upcomingAwardsPage: async ({ page }, use) => {
+    const upcomingAwardsPage = new Page.AwardsPage(
+      page,
+      Config.upcomingAwardsConfig,
+    );
+
+    await upcomingAwardsPage.navigateToAwardsPage();
 
     await use(upcomingAwardsPage);
   },

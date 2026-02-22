@@ -13,7 +13,7 @@ export class HomePage extends BasePage {
       "Search for a movie, tv show, person......",
     );
     this.searchResults = page.getByRole("heading", { name: "Search Results" });
-    this.searchItem = page.getByText("Inception July 16, 2010 Cobb");
+    this.searchItem = page.locator("a").filter({ hasText: /^Inception$/ });
   }
 
   async navigateToHome() {
