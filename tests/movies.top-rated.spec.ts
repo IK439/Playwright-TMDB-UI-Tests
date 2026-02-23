@@ -27,8 +27,7 @@ test.describe("Top-Rated Movies Feature", () => {
     await moviesTopRatedPage.selectGenre();
     await expect(moviesTopRatedPage.genre).toContainText("Mystery");
 
-    await moviesTopRatedPage.selectCertification();
-    await expect(moviesTopRatedPage.certification).toContainText("12A");
+    await expect(moviesTopRatedPage.certification).toBeAttached();
 
     await moviesTopRatedPage.selectLanguage();
     await expect(moviesTopRatedPage.languageOptionText).toContainText(

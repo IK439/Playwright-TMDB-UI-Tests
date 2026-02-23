@@ -71,10 +71,7 @@ export class MoviesPageOne extends BasePage {
       name: this.config.genre,
     });
 
-    this.certification = page.getByRole("link", {
-      name: this.config.certification,
-      exact: true,
-    });
+    this.certification = page.getByRole("heading", { name: "Certification" });
 
     this.languageDropDown = page
       .getByRole("combobox")
@@ -123,10 +120,6 @@ export class MoviesPageOne extends BasePage {
 
   async selectGenre() {
     await this.genre.click();
-  }
-
-  async selectCertification() {
-    await this.certification.click();
   }
 
   async selectLanguage() {

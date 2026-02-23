@@ -3,7 +3,6 @@ export type MoviesPageType = {
   defaultSortText: string;
   sortOption: string;
   genre: string;
-  certification: string;
   keyword: string;
 };
 
