@@ -80,10 +80,9 @@ export class MoviesPageTwo extends BasePage {
       .getByRole("listitem")
       .filter({ hasText: this.config.genre });
 
-    this.certification = page.getByRole("link", {
-      name: this.config.certification,
-      exact: true,
-    });
+    this.certification = page
+      .getByRole("listitem")
+      .filter({ hasText: this.config.certification });
 
     this.languageDropDown = page
       .getByRole("combobox")
@@ -135,7 +134,6 @@ export class MoviesPageTwo extends BasePage {
   }
 
   async selectCertification() {
-    await this.certification.scrollIntoViewIfNeeded();
     await this.certification.click();
   }
 
