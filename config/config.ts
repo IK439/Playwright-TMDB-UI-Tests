@@ -5,7 +5,7 @@ export const popularMoviesConfig: Type.MoviesPageType = {
   defaultSortText: "Popularity Descending",
   sortOption: "Rating Descending",
   genre: "Action",
-  certification: "PG",
+  certification: "12",
   keyword: "action packed",
 };
 
@@ -23,7 +23,7 @@ export const nowPlayingMoviesConfig: Type.MoviesPageType = {
   defaultSortText: "Popularity Descending",
   sortOption: "Rating Descending",
   genre: "Animation",
-  certification: "U",
+  certification: "PG",
   keyword: "",
 };
 
@@ -32,7 +32,7 @@ export const upcomingMoviesConfig: Type.MoviesPageType = {
   defaultSortText: "Popularity Descending",
   sortOption: "Release Date Descending",
   genre: "Comedy",
-  certification: "U",
+  certification: "PG",
   keyword: "",
 };
 
