@@ -104,6 +104,7 @@ export class MoviesPageOne extends BasePage {
 
   async navigateToMoviesPage() {
     await this.navigate(`${ENV.baseUrl}${this.config.path}`);
+    await this.acceptCookiesIfVisible();
   }
 
   async sortResults() {

@@ -18,4 +18,12 @@ export class BasePage {
 
     await this.page.goto(finalUrl);
   }
+
+  async acceptCookiesIfVisible() {
+    const acceptButton = this.page.locator("#onetrust-accept-btn-handler");
+
+    if (await acceptButton.isVisible()) {
+      await acceptButton.click();
+    }
+  }
 }
