@@ -126,6 +126,7 @@ export class MoviesPageOne extends BasePage {
   }
 
   async selectCertification() {
+    await this.certification.scrollIntoViewIfNeeded();
     await this.certification.click();
   }
 
