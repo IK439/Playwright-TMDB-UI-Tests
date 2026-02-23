@@ -28,8 +28,9 @@ export default defineConfig({
     /* Base URL to use in actions like `await page.goto('')`. */
     headless: true,
     baseURL: process.env.TMDB_BASE_URL,
+    locale: "en-GB",
+    timezoneId: "Europe/London",
     screenshot: "only-on-failure",
-
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
   },
