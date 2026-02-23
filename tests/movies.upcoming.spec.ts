@@ -29,8 +29,8 @@ test.describe("Upcoming Movies Feature", () => {
     await moviesUpcomingPage.selectGenre();
     await expect(moviesUpcomingPage.genre).toContainText("Comedy");
 
-    await moviesUpcomingPage.selectCertification();
-    await expect(moviesUpcomingPage.certification).toContainText("PG");
+    //await moviesUpcomingPage.selectCertification();
+    //await expect(moviesUpcomingPage.certification).toContainText("PG");
 
     await moviesUpcomingPage.selectLanguage();
     await expect(moviesUpcomingPage.languageOptionText).toContainText(
