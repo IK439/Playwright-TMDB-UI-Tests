@@ -30,7 +30,7 @@ test.describe("Movies Now Playing Feature", () => {
     await expect(moviesNowPlayingPage.genre).toContainText("Animation");
 
     await moviesNowPlayingPage.selectCertification();
-    await expect(moviesNowPlayingPage.certification).toContainText("U");
+    await expect(moviesNowPlayingPage.certification).toContainText("PG");
 
     await moviesNowPlayingPage.selectLanguage();
     await expect(moviesNowPlayingPage.languageOptionText).toContainText(

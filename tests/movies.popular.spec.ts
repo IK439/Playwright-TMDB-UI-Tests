@@ -28,7 +28,7 @@ test.describe("Popular Movies Feature", () => {
     await expect(moviesPopularPage.genre).toContainText("Action");
 
     await moviesPopularPage.selectCertification();
-    await expect(moviesPopularPage.certification).toContainText("PG");
+    await expect(moviesPopularPage.certification).toContainText("12");
 
     await moviesPopularPage.selectLanguage();
     await expect(moviesPopularPage.languageOptionText).toContainText(/English/);
