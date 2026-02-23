@@ -73,7 +73,8 @@ export class MoviesPageOne extends BasePage {
 
     this.certification = page
       .getByRole("listitem")
-      .filter({ hasText: this.config.certification });
+      .filter({ hasText: this.config.certification })
+      .first();
 
     this.languageDropDown = page
       .getByRole("combobox")

@@ -76,9 +76,11 @@ export class MoviesPageTwo extends BasePage {
     this.filterFrom = page.locator("#release_date_gte");
     this.filterTo = page.locator("#release_date_lte");
 
-    this.genre = page.getByRole("link", {
-      name: this.config.genre,
-    });
+    this.genre = page
+      .getByRole("link", {
+        name: this.config.genre,
+      })
+      .first();
 
     this.certification = page.getByRole("link", {
       name: this.config.certification,
