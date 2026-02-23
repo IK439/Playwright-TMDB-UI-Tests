@@ -11,10 +11,6 @@ export class HomePage extends BasePage {
   readonly joinToday: Locator;
   readonly leaderBoard: Locator;
 
-  readonly searchInput: Locator;
-  readonly searchResults: Locator;
-  readonly searchItem: Locator;
-
   constructor(page: Page) {
     super(page);
 
@@ -31,12 +27,6 @@ export class HomePage extends BasePage {
     this.freeToWatch = page.getByRole("heading", { name: "Free To Watch" });
     this.joinToday = page.getByRole("heading", { name: "Join Today" });
     this.leaderBoard = page.getByRole("heading", { name: "Leaderboard" });
-    this.searchInput = page.getByPlaceholder(
-      "Search for a movie, tv show, person......",
-    );
-
-    this.searchResults = page.getByRole("heading", { name: "Search Results" });
-    this.searchItem = page.locator("a").filter({ hasText: /^Inception$/ });
   }
 
   async navigateToHome() {

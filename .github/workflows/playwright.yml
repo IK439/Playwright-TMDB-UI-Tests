@@ -18,24 +18,15 @@ jobs:
       options: --user 1001
     steps:
       - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
       - uses: actions/setup-node@v6
         with:
           node-version: lts/*
       - name: Install dependencies
         run: npm ci
-      - name: Run changed Playwright tests
-        run: |
-          BASE_BRANCH=${GITHUB_BASE_REF:-main}
-          git fetch origin $BASE_BRANCH
-          CHANGED=$(git diff --name-only origin/$BASE_BRANCH...HEAD | grep '\.spec\.ts$' || true)
-
-          if [ -z "$CHANGED" ]; then
-            npx playwright test --reporter=html
-          else
-            npx playwright test $CHANGED --reporter=html
-          fi
+      #- name: Install Playwright Browsers
+      #run: npx playwright install --with-deps
+      - name: Run Playwright tests
+        run: npx playwright test --reporter=html
       - uses: actions/upload-artifact@v5
         if: ${{ !cancelled() }}
         with:
