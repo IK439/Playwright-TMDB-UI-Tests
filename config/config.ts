@@ -5,7 +5,7 @@ export const popularMoviesConfig: Type.MoviesPageType = {
   defaultSortText: "Popularity Descending",
   sortOption: "Rating Descending",
   genre: "Action",
-  certification: "15",
+  certification: "12",
   keyword: "action packed",
 };
 
@@ -14,7 +14,7 @@ export const topRatedMoviesConfig: Type.MoviesPageType = {
   defaultSortText: "Rating Descending",
   sortOption: "Release Date Descending",
   genre: "Mystery",
-  certification: "12A",
+  certification: "12",
   keyword: "sequel",
 };
 
@@ -23,7 +23,7 @@ export const nowPlayingMoviesConfig: Type.MoviesPageType = {
   defaultSortText: "Popularity Descending",
   sortOption: "Rating Descending",
   genre: "Animation",
-  certification: "PG",
+  certification: "12",
   keyword: "",
 };
 
@@ -32,7 +32,7 @@ export const upcomingMoviesConfig: Type.MoviesPageType = {
   defaultSortText: "Popularity Descending",
   sortOption: "Release Date Descending",
   genre: "Comedy",
-  certification: "PG",
+  certification: "12",
   keyword: "",
 };
 

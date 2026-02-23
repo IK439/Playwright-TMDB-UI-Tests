@@ -80,9 +80,10 @@ export class MoviesPageTwo extends BasePage {
       .getByRole("listitem")
       .filter({ hasText: this.config.genre });
 
-    this.certification = page
-      .getByRole("listitem")
-      .filter({ hasText: this.config.certification }).first();
+    this.certification = page.getByRole("link", {
+      name: this.config.certification,
+      exact: true,
+    });
 
     this.languageDropDown = page
       .getByRole("combobox")
