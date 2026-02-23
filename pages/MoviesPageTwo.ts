@@ -84,7 +84,7 @@ export class MoviesPageTwo extends BasePage {
 
     this.certification = page.getByRole("link", {
       name: this.config.certification,
-    });
+    }).first();
 
     this.languageDropDown = page
       .getByRole("combobox")
