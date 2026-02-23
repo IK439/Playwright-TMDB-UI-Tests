@@ -12,11 +12,11 @@ The suite interacts with the TMDB UI to verify core user journeys, functionality
 
 ## 🚀 Features
 
-✔ End‑to‑end UI test coverage using Playwright.
-✔ Organized folder structure (pages, fixtures, utils, tests).
-✔ TypeScript support and configurations.
-✔ Cross‑browser test execution (Chromium, Firefox, WebKit).
-✔ Support for Playwright Test UI mode for debugging.
+- ✔ End‑to‑end UI test coverage using Playwright.
+- ✔ Organized folder structure (pages, fixtures, utils, tests).
+- ✔ TypeScript support and configurations.
+- ✔ Cross‑browser test execution (Chromium, Firefox, WebKit).
+- ✔ Support for Playwright Test UI mode for debugging.
 
 ---
 
