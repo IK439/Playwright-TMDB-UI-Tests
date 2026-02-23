@@ -77,14 +77,13 @@ export class MoviesPageTwo extends BasePage {
     this.filterTo = page.locator("#release_date_lte");
 
     this.genre = page
-      .getByRole("link", {
-        name: this.config.genre,
-      })
-      .first();
+      .getByRole("listitem")
+      .filter({ hasText: this.config.genre });
 
     this.certification = page.getByRole("link", {
       name: this.config.certification,
-    }).first();
+      exact: true,
+    });
 
     this.languageDropDown = page
       .getByRole("combobox")
