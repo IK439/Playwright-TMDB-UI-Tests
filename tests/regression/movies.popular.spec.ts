@@ -1,6 +1,6 @@
-import { test, expect } from "../fixtures/base";
+import { test, expect } from "../../fixtures/base";
 
-test.describe("Popular Movies Feature", () => {
+test.describe("Popular Movies Feature", { tag: ["@regression"] }, () => {
   test("Sort and filter for popular action movies", async ({
     moviesPopularPage,
   }) => {

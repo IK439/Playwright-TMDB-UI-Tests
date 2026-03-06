@@ -1,4 +1,4 @@
-import { Page, Locator } from "@playwright/test";
+import { Page, Locator, test } from "@playwright/test";
 import { BasePage } from "./BasePage";
 import { ENV } from "../utils/env";
 import * as Type from "../types/movies.types";
@@ -100,38 +100,54 @@ export class MoviesPageOne extends BasePage {
   }
 
   async navigateToMoviesPage() {
-    await this.navigate(`${ENV.baseUrl}${this.config.path}`);
-    await this.acceptCookiesIfVisible();
+    await test.step("Navigate to movies page and accept cookies if visible", async () => {
+      await this.navigate(`${ENV.baseUrl}${this.config.path}`);
+      await this.acceptCookiesIfVisible();
+    });
   }
 
   async sortResults() {
-    await this.sort.click();
-    await this.sortDropDown.click();
-    await this.sortOption.click();
+    await test.step("Sort results using configured option", async () => {
+      await this.sort.click();
+      await this.sortDropDown.click();
+      await this.sortOption.click();
+    });
   }
 
   async filterFromDate(day: number, month: number, year: number) {
-    await this.filterFrom.fill(`${day}/${month}/${year}`);
+    await test.step(`Filter results from date ${day}/${month}/${year}`, async () => {
+      await this.filterFrom.fill(`${day}/${month}/${year}`);
+    });
   }
 
   async filterToDate(day: number, month: number, year: number) {
-    await this.filterTo.fill(`${day}/${month}/${year}`);
+    await test.step(`Filter results to date ${day}/${month}/${year}`, async () => {
+      await this.filterTo.fill(`${day}/${month}/${year}`);
+    });
   }
 
   async selectGenre() {
-    await this.genre.click();
+    await test.step(`Select genre ${this.config.genre}`, async () => {
+      await this.genre.click();
+    });
   }
 
   async selectLanguage() {
-    await this.languageDropDown.click();
-    await this.languageFilter.click();
+    await test.step("Select language English", async () => {
+      await this.languageDropDown.click();
+      await this.languageFilter.click();
+    });
   }
 
   async addKeyword() {
-    await this.keyWords.fill(this.config.keyword);
+    await test.step(`Add keyword ${this.config.keyword}`, async () => {
+      await this.keyWords.fill(this.config.keyword);
+    });
   }
 
   async search() {
-    await this.searchButton.click();
+    await test.step("Click search button", async () => {
+      await this.searchButton.click();
+    });
   }
 }

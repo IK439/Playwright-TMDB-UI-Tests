@@ -1,4 +1,4 @@
-import { Page, Locator } from "@playwright/test";
+import { Page, Locator, test } from "@playwright/test";
 import { BasePage } from "./BasePage";
 import { ENV } from "../utils/env";
 import * as Type from "../types/movies.types";
@@ -44,24 +44,34 @@ export class AwardsPage extends BasePage {
   }
 
   async navigateToAwardsPage() {
-    await this.navigate(`${ENV.baseUrl}${this.config.path}`);
+    await test.step("Navigate to awards page", async () => {
+      await this.navigate(`${ENV.baseUrl}${this.config.path}`);
+    });
   }
 
   async sortResults() {
-    await this.sort.click();
-    await this.sortDropDown.click();
-    await this.sortOption.click();
+    await test.step("Sort results using configured option", async () => {
+      await this.sort.click();
+      await this.sortDropDown.click();
+      await this.sortOption.click();
+    });
   }
 
   async filterFromDate(day: number, month: number, year: number) {
-    await this.filterFrom.fill(`${day}/${month}/${year}`);
+    await test.step(`Filter results from date ${day}/${month}/${year}`, async () => {
+      await this.filterFrom.fill(`${day}/${month}/${year}`);
+    });
   }
 
   async filterToDate(day: number, month: number, year: number) {
-    await this.filterTo.fill(`${day}/${month}/${year}`);
+    await test.step(`Filter results to date ${day}/${month}/${year}`, async () => {
+      await this.filterTo.fill(`${day}/${month}/${year}`);
+    });
   }
 
   async search() {
-    await this.searchButton.click();
+    await test.step("Execute search", async () => {
+      await this.searchButton.click();
+    });
   }
 }

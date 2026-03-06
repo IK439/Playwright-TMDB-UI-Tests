@@ -1,6 +1,6 @@
-import { test, expect } from "../fixtures/base";
+import { test, expect } from "../../fixtures/base";
 
-test.describe("Popular Awards Feature", () => {
+test.describe("Popular Awards Feature", { tag: ["@smoke"] }, () => {
   test("Sort and filter popular awards by popularity ascending", async ({
     popularAwardsPage,
   }) => {

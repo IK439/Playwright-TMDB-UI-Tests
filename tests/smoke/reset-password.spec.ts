@@ -1,6 +1,6 @@
-import { test, expect } from "../fixtures/base";
+import { test, expect } from "../../fixtures/base";
 
-test.describe("Reset Password Feature", () => {
+test.describe("Reset Password Feature", { tag: ["@smoke"] }, () => {
   test("Clicking continue with no email shows error message", async ({
     resetPasswordPage,
   }) => {

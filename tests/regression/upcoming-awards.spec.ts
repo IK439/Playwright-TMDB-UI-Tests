@@ -1,6 +1,6 @@
-import { test, expect } from "../fixtures/base";
+import { test, expect } from "../../fixtures/base";
 
-test.describe("Upcoming Awards Feature", () => {
+test.describe("Upcoming Awards Feature", { tag: ["@regression"] }, () => {
   test("Sort and filter upcoming awards by popularity descending", async ({
     upcomingAwardsPage,
   }) => {

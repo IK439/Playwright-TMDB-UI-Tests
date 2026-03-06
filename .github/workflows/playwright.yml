@@ -4,14 +4,17 @@ on:
     branches: [main, master]
   pull_request:
     branches: [main, master]
+  schedule:
+    - cron: "0 2 * * *"
 env:
   TMDB_BASE_URL: ${{ secrets.TMDB_BASE_URL }}
   TMDB_USERNAME: ${{ secrets.TMDB_USERNAME }}
   TMDB_PASSWORD: ${{ secrets.TMDB_PASSWORD }}
   TMDB_EMAIL: ${{ secrets.TMDB_EMAIL }}
 jobs:
-  test:
-    timeout-minutes: 60
+  smoke:
+    name: Smoke Tests
+    if: github.event_name == 'push' # Only run on push
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.58.2-noble
@@ -23,13 +26,55 @@ jobs:
           node-version: lts/*
       - name: Install dependencies
         run: npm ci
-      #- name: Install Playwright Browsers
-      #run: npx playwright install --with-deps
-      - name: Run Playwright tests
-        run: npx playwright test --reporter=html
+      - name: Run Smoke Tests
+        run: npx playwright test --grep @smoke --reporter=html
       - uses: actions/upload-artifact@v5
         if: ${{ !cancelled() }}
         with:
-          name: playwright-report
+          name: playwright-report-smoke
+          path: playwright-report/
+          retention-days: 30
+  regression:
+    name: Regression Tests
+    if: github.event_name == 'pull_request' # Only run on PR
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.58.2-noble
+      options: --user 1001
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+      - name: Install dependencies
+        run: npm ci
+      - name: Run Regression Tests
+        run: npx playwright test --grep @regression --reporter=html
+      - uses: actions/upload-artifact@v5
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report-regression
+          path: playwright-report/
+          retention-days: 30
+  nightly:
+    name: Nightly Tests
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.58.2-noble
+      options: --user 1001
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+      - name: Install dependencies
+        run: npm ci
+      - name: Run Nightly Tests
+        run: npx playwright test --grep @nightly --reporter=html
+      - uses: actions/upload-artifact@v5
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report-nightly
           path: playwright-report/
           retention-days: 30

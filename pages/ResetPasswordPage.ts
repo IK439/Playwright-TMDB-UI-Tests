@@ -1,4 +1,4 @@
-import { Page, Locator } from "@playwright/test";
+import { Page, Locator, test } from "@playwright/test";
 import { BasePage } from "./BasePage";
 import { ENV } from "../utils/env";
 
@@ -28,19 +28,27 @@ export class ResetPasswordPage extends BasePage {
   }
 
   async navigateToResetPassword() {
-    await this.navigate(`${ENV.baseUrl}/reset-password`);
+    await test.step("Navigate to reset password page", async () => {
+      await this.navigate(`${ENV.baseUrl}/reset-password`);
+    });
   }
 
   async enterEmailAndContinue() {
-    this.emailInput.fill(ENV.email);
-    this.continueButton.click();
+    await test.step("Enter email and click continue", async () => {
+      await this.emailInput.fill(ENV.email);
+      await this.continueButton.click();
+    });
   }
 
   async clickContinue() {
-    await this.continueButton.click();
+    await test.step("Click continue button", async () => {
+      await this.continueButton.click();
+    });
   }
 
   async clickCancel() {
-    await this.cancelButton.click();
+    await test.step("Click cancel button", async () => {
+      await this.cancelButton.click();
+    });
   }
 }

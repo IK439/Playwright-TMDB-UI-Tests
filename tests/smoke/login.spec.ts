@@ -1,6 +1,6 @@
-import { test, expect } from "../fixtures/base";
+import { test, expect } from "../../fixtures/base";
 
-test.describe("Login Feature", () => {
+test.describe("Login Feature", { tag: ["@smoke"] }, () => {
   test("Invalid login shows error message", async ({ loginPage }) => {
     await expect(loginPage.heading).toContainText("Login to your account");
 

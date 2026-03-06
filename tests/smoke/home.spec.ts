@@ -1,6 +1,6 @@
-import { test, expect } from "../fixtures/base";
+import { test, expect } from "../../fixtures/base";
 
-test.describe("Home Feature", () => {
+test.describe("Home Feature", { tag: ["@smoke"] }, () => {
   test("Search for movie from homepage", async ({ homePage }) => {
     await expect(homePage.searchBox).toBeAttached();
     await expect(homePage.trending).toBeAttached();

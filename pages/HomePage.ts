@@ -1,4 +1,4 @@
-import { Page, Locator } from "@playwright/test";
+import { Page, Locator, test } from "@playwright/test";
 import { BasePage } from "./BasePage";
 import { ENV } from "../utils/env";
 
@@ -30,6 +30,8 @@ export class HomePage extends BasePage {
   }
 
   async navigateToHome() {
-    await this.navigate(`${ENV.baseUrl}/`);
+    await test.step("Navigate to home page", async () => {
+      await this.navigate(`${ENV.baseUrl}/`);
+    });
   }
 }

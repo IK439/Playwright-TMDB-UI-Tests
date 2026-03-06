@@ -1,4 +1,4 @@
-import { Page, Locator } from "@playwright/test";
+import { Page, Locator, test } from "@playwright/test";
 import { BasePage } from "./BasePage";
 import { ENV } from "../utils/env";
 
@@ -28,15 +28,19 @@ export class LoginPage extends BasePage {
   }
 
   async navigateToLogin() {
-    await this.navigate(`${ENV.baseUrl}/login`);
+    await test.step("Navigate to login page", async () => {
+      await this.navigate(`${ENV.baseUrl}/login`);
+    });
   }
 
   async login(
     username: string = ENV.username,
     password: string = ENV.password,
   ) {
-    await this.usernameInput.fill(username);
-    await this.passwordInput.fill(password);
-    await this.loginButton.click();
+    await test.step(`Login with username ${username}`, async () => {
+      await this.usernameInput.fill(username);
+      await this.passwordInput.fill(password);
+      await this.loginButton.click();
+    });
   }
 }

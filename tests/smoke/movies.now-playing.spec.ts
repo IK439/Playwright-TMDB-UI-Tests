@@ -1,6 +1,6 @@
-import { test, expect } from "../fixtures/base";
+import { test, expect } from "../../fixtures/base";
 
-test.describe("Movies Now Playing Feature", () => {
+test.describe("Movies Now Playing Feature", { tag: ["@smoke"] }, () => {
   test("Sort and filter for animation movies playing now", async ({
     moviesNowPlayingPage,
   }) => {
