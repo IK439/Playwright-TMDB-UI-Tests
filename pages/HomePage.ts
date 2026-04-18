@@ -1,6 +1,7 @@
 import { Page, Locator, test } from "@playwright/test";
 import { BasePage } from "./BasePage";
 import { ENV } from "../utils/env";
+import { accessibilityScanner } from "../utils/accessibility";
 
 export class HomePage extends BasePage {
   readonly searchBox: Locator;
@@ -32,6 +33,14 @@ export class HomePage extends BasePage {
   async navigateToHome() {
     await test.step("Navigate to home page", async () => {
       await this.navigate(`${ENV.baseUrl}/`);
+    });
+  }
+
+  async runAccessibilityChecker(): Promise<number> {
+    return await test.step("Run accessibility scanner", async () => {
+      const results = await accessibilityScanner(this.page);
+
+      return results.violations.length;
     });
   }
 }

@@ -10,4 +10,13 @@ test.describe("Home Feature", { tag: ["@smoke"] }, () => {
     await expect(homePage.joinToday).toBeAttached();
     await expect(homePage.leaderBoard).toBeAttached();
   });
+
+  test("Homepage accessibility violations are within acceptable threshold", async ({
+    homePage,
+  }) => {
+    const accessibilityViolationCount =
+      await homePage.runAccessibilityChecker();
+
+    expect(accessibilityViolationCount).toBeLessThanOrEqual(5);
+  });
 });
