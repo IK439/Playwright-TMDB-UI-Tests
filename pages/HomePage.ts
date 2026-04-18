@@ -1,7 +1,7 @@
 import { Page, Locator, test } from "@playwright/test";
 import { BasePage } from "./BasePage";
 import { ENV } from "../utils/env";
-import { accessibilityScanner } from "../utils/accessibility";
+import { accessibilityScanner } from "../utils/accessibilityScanner";
 
 export class HomePage extends BasePage {
   readonly searchBox: Locator;
