@@ -2,6 +2,7 @@ import { test, expect } from "../../fixtures/base";
 
 test.describe("Login Feature", { tag: ["@smoke"] }, () => {
   test("Invalid login shows error message", async ({ loginPage }) => {
+    await expect(loginPage.getPage()).toHaveURL(/\/login(?:\?.*)?$/);
     await expect(loginPage.heading).toContainText("Login to your account");
 
     await loginPage.login("wrongUser", "wrongPass");

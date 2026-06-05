@@ -2,6 +2,7 @@ import { test, expect } from "../../fixtures/base";
 
 test.describe("Home Feature", { tag: ["@smoke"] }, () => {
   test("Search for movie from homepage", async ({ homePage }) => {
+    await expect(homePage.getPage()).toHaveURL(/\/(?:\?.*)?$/);
     await expect(homePage.searchBox).toBeAttached();
     await expect(homePage.trending).toBeAttached();
     await expect(homePage.latestTrailers).toBeAttached();
